@@ -5,6 +5,7 @@ import {
   createRow,
   defaultFieldSpace,
   setShip,
+  setShips,
 } from "../src/battle-ship.js";
 
 describe("create default space of field", () => {
@@ -108,10 +109,60 @@ describe("set ship in a small field", () => {
         { isEmpty: false, isFound: false },
       ],
     };
-    
+
     assertEquals(setShip(createField(2), "a1"), expectedField1);
     assertEquals(setShip(createField(2), "a2"), expectedField2);
     assertEquals(setShip(createField(2), "b1"), expectedField3);
     assertEquals(setShip(createField(2), "b2"), expectedField4);
+  });
+});
+
+describe('set multiple ship in a small field', () => {
+  it('should provide field with multiple ship there when field has many ship', () => {
+    const expectedField1 = {
+      a: [
+        { isEmpty: false, isFound: false },
+        { isEmpty: false, isFound: false },
+      ],
+      b: [
+        { isEmpty: true, isFound: false },
+        { isEmpty: true, isFound: false },
+      ],
+    };
+    const expectedField2 = {
+      a: [
+        { isEmpty: true, isFound: false },
+        { isEmpty: true, isFound: false },
+      ],
+      b: [
+        { isEmpty: false, isFound: false },
+        { isEmpty: false, isFound: false },
+      ],
+    };
+    const expectedField3 = {
+      a: [
+        { isEmpty: false, isFound: false },
+        { isEmpty: true, isFound: false },
+      ],
+      b: [
+        { isEmpty: true, isFound: false },
+        { isEmpty: false, isFound: false },
+      ],
+    };
+    const expectedField4 = {
+      a: [
+        { isEmpty: true, isFound: false },
+        { isEmpty: false, isFound: false },
+      ],
+      b: [
+        { isEmpty: false, isFound: false },
+        { isEmpty: true, isFound: false },
+      ],
+    };
+
+    assertEquals(setShips(createField(2), ["a1", "a2"]), expectedField1);
+    assertEquals(setShips(createField(2), ["b1", "b2"]), expectedField2);
+    assertEquals(setShips(createField(2), ["a1", "b2"]), expectedField3);
+    assertEquals(setShips(createField(2), ["a2", "b1"]), expectedField4);
   });
 });
