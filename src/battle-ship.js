@@ -37,3 +37,12 @@ export const setShip = (field, shipPosition) => {
 
   return updatedField;
 };
+
+export const setShips = (field, shipPositions) => {
+  return shipPositions.reduce(
+    (updatedField, shipPosition) => setShip(updatedField, shipPosition),
+    field
+  );
+};
+
+console.log(setShips(createField(5), ["a1", "a2", "b4", "c1"]))
