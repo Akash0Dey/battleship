@@ -28,12 +28,17 @@ export const createField = (width) => {
   }, {});
 };
 
+export const findInField = (field, position) => {
+  const rowNo = position.at(0);
+  const colNo = position.at(1) - 1;
+
+  return field[rowNo][colNo]
+}
+
 export const setShip = (field, shipPosition) => {
   const updatedField = structuredClone(field);
-  const rowNo = shipPosition.at(0);
-  const colNo = shipPosition.at(1) - 1;
 
-  updatedField[rowNo][colNo].isEmpty = false;
+  findInField(updatedField, shipPosition).isEmpty = false;
 
   return updatedField;
 };
@@ -45,4 +50,7 @@ export const setShips = (field, shipPositions) => {
   );
 };
 
-console.log(setShips(createField(5), ["a1", "a2", "b4", "c1"]))
+export const guessPosition = (field, position) => {
+
+}
+// console.log(setShips(createField(5), ["a1", "a2", "b4", "c1"]))
